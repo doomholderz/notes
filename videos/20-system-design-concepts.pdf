@@ -1,0 +1,91 @@
+# 20 System Design Concepts
+
+## Horizontal Scaling
+
+Each server in this pattern can handle a subset of the overall requests.
+
+More powerful than vertical scaling as scaling is almost infinite.
+
+Adds redundancy and fault tolerance, servers going down can have their 
+requests served by other servers.
+
+Harder to setup - ensuring servers don't have requests unfairly assigned.
+
+## Load Balancer
+
+Reverse proxy server for balancing traffic through servers.
+
+Aiming to even the amount of traffic servers are getting.
+
+Can route requests based on routing geographically.
+
+## Content Delivery Networks
+
+If we're serving static content like images, videos, HTML/CSS/JS, you can 
+use CDN.
+
+Network of servers located around the world.
+
+They don't run any application logic, they just take files hosted on your 
+server and copy them to CDN servers.
+
+Can be done on push or pull basis.
+
+Effectively just a method of caching.
+
+## Caching
+
+Creating copies of data to fetch faster in future, reducing network 
+requests required.
+
+Typically stored on L1/L2/L3 CPU cache
+
+## API Paradigms
+
+REST: built around HTTP APIs, making them stateless and consistent. 
+
+GraphQL: instead of making requests per resources, GraphQL lets you make a 
+query to ask for what resources to fetch (e.g. multiple resources with 
+single request) and this way you only get the data needed
+
+gRPC: framework for server-to-server communication (generally) - gRPC web 
+for client-server. Use protocol buffers rather than JSON in REST, and lets 
+you serialize data into more storage efficient files.
+
+## WebSockets
+
+Another app layer protocol like HTTP. 
+
+Fixes issues of polling, where with HTTP a client would have to request to 
+server for new events.
+
+WebSockets supports bidirectional communication, so events can be pushed 
+directly from server to client.
+
+## Sharding
+
+Scaling databases horizontally.
+
+Shard keys helps to break data into multiple data stores.
+
+## Replication
+
+Can scale for example database reads, where read-only copies of databases 
+are replicated. 
+
+Leader-follower replication means writes are sent to the leader, sent then 
+to the followers by leader, but all reads can be done on leaders or 
+followers.
+
+## CAP Theorem
+
+Consistency, availability, partition (network)
+
+## Message Queues
+
+Durable storage and can be replicated and sharded
+
+If system receives more data than it can process, introduction of message 
+queue allows data to be persisted before processing.
+
+Doing this also means different parts of our app can become decoupled
